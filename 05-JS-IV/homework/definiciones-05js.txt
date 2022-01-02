@@ -1,0 +1,18 @@
+
+* Objetos   
+Son variables que pueden almacenar mucha información sobre una misma cosa
+
+* Propiedades
+Las propiedades son los tipos de información que contiene el objeto dentro y se definen 
+mediante palabras clave y valores asociados a estas palabras claves.
+
+* Métodos
+Los métodos son funciones que se encuentran dentro de un objeto
+
+* Bucle `for…in`
+Es un bucle que se usa para iterar dentro de objetos y recorrer las palabras clave
+
+* Notación de puntos vs notación de corchetes
+La notación de puntos se usa para invocar a una propiedad escribiendo el objeto.clave.
+La notación de corchetes se usa escribiendo la palabra clave entre comillas o con numeros, 
+o bien una variable designada para una cadena o numero.
