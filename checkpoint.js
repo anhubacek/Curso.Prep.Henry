@@ -9,6 +9,7 @@ function minutosASegundos(minutos) {
   // minutosASegundos(5) => 300
   // minutosASegundos(3) => 180
   // Tu código aca:
+  return minutos * 60;
 
 }
 
@@ -21,8 +22,15 @@ function promedio(array) {
   // Nota: Los numeros estan ordenados de menor a mayor.
 
   // Tu código aca:
+  var sumanumeros= array.reduce(function(suma, elemento) {
+    return suma + elemento;
+  }, 0);
+  var divisor= array.length;
+  var promedio= sumanumeros/divisor
+  return promedio;
+  }
 
-}
+
 
 function salarioAnual(empleados, nombre) {
   // Escribe una funcion que reciba un arreglo de objetos con info de empleados (empleados)
@@ -45,8 +53,14 @@ function salarioAnual(empleados, nombre) {
   // salarioAnual(empleados, 'Flor'); => 48000
   // salarioAnual(empleados, 'Manuel;); => 12000
   // Tu código aca:
-
+ var salariopersona=0;
+   for (var i=0;  i<=empleados.length -1; i++) {
+     if(empleados[i].nombre ===nombre){
+     salariopersona=empleados[i].salario
+   }; 
+  } return salariopersona*12;
 }
+    
 
 function encontrarLaPalabra(string) {
   // Escribir una funcion que reciba un string (string) y retorne true si encuentra la palabra "henry" adentro.
@@ -56,8 +70,13 @@ function encontrarLaPalabra(string) {
   // encontrarLaBomba('hola que tal, como va?!') => false;
 
   // Tu código:
+ if (string.includes("henry")) {
+   return true;
+ } else {
+   return false;
+ }
+ }
 
-}
 
 function index() {
   // Escribi una función encontraIndex en el prototipo de Arrays,
@@ -73,6 +92,14 @@ function index() {
   // numeros.encontraIndex(23) debe devolver -1 ya que ese elemento no existe en ese array.
 
   // Tu código aca:
+  
+  Arrays.prototype.encontraIndex = function (elemento) {
+   for(var i=0; i<this.length; i++){
+      if(this[i]===elemento) {
+        return i;
+      } 
+   } 
+  }; return "-1";
 
 };
 
@@ -84,22 +111,34 @@ function crearClaseEmpleado() {
   // nombre (string) , salario (integer) , tareas (array de objetos), jefe (booleano - por defecto false) 
 
   class Empleado {
-    constructor() {
-
-    }
+    constructor(nombre, salario, tareas, jefe) {
+      this.nombre=nombre,
+      this.salario= salario,
+      this.tareas= tareas,
+      this.jefe= jefe || false
+    };
 
     addTarea(tarea, prioridad) {
       // el metodo addTarea recibe un string tarea y un entero prioridad y debe agregar un objeto:
       // { tarea: tarea, prioridad: prioridad} al arreglo de tareas del empleado.
       // no debe retornar nada.
-      
+     
+      this.tareas.push({tarea:tarea, prioridad:prioridad});
+    
     }
+  
 
     switchJefe() {
       // este método debe switchear el booleano jefe, si estaba en true, dejarlo en false
       // y si estaba en false, dejarlo en true
       // no debe retornar nada.
-      
+      switch (this.jefe) {
+        case false:
+          this.jefe = true;
+          break;
+        case true:
+          this.jefe= false;
+      }
     }
     getTareas() {
       // Escribe una función que retorne un arreglo con sólo los nombres (tarea) del arreglo de tareas
@@ -111,7 +150,10 @@ function crearClaseEmpleado() {
       //  ];
       // Ej:
       // persona.getTareas() // retorna ['compras', 'dar clases', 'operaciones']
-      
+    var  nuevoarray =[]
+    for(var i=0; i<=this.tareas.length -1; i++) {
+      nuevoarray.push(this.tareas[i].tarea);
+    }; return nuevoarray;
     }
 
     getTareasPrioritarias(prioridad) {
@@ -131,8 +173,12 @@ function crearClaseEmpleado() {
       //  nombre: 'compras',
       //  prioridad: 4,
       // }]
-      
-    }
+      var  nuevoarray =[]
+      for(var i=0; i<=this.tareas.length -1; i++) {
+        if(this.tareas[i].prioridad > prioridad){
+        nuevoarray.push(this.tareas[i]);
+      }}; return nuevoarray;
+      }
 
   };
 
@@ -163,9 +209,16 @@ function filtrar(funcion) {
   // productos.filtrar(function(p) {
   //   return p.price >= 50;
   // }) => [{price: 100, name:'tv'}]
-  
-  
-};
+
+  Arrays.prototype.filtrar=function(funcion) {
+  var nuevoarray=[]
+  for (var i=0; i<this.length; i++) {
+   if(funcion(this[i]) === true){
+    nuevoarray.push(this[i]);
+  }
+}; return nuevoarray;
+}
+}
 
 // No modifiques nada debajo de esta linea
 //
